@@ -10,6 +10,6 @@ interface ICurrentTaskStore {
 export const useSelectedTask = create<ICurrentTaskStore>()(
   devtools((set) => ({
     selectedTask: null,
-    setSelectedTask: (newSelectedTask) => set(() => ({ selectedTask: newSelectedTask })),
+    setSelectedTask: (newSelectedTask) => set((state) => ({ ...state, selectedTask: newSelectedTask })),
   })),
 );
