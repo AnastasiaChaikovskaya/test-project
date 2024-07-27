@@ -1,2 +1,2 @@
-export * from './data-table';
-export * from './table-header';
+export * from './DataTable';
+export * from './AppTableHeader';

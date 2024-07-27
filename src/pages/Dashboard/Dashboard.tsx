@@ -1,6 +1,12 @@
 import { DataTable } from '@/components/common/DataTable';
+import { CreateTaskModal } from '@/components/common/Modals/CreateTaskModal';
+import { Button } from '@/components/ui/button';
+import { APP_ROUTS } from '@/constants/routes';
 import { IMAGE_ASPECT_RATIO, TASK_GEN_TYPE, TASK_TEMPLATE_ID } from '@/constants/task-constants';
+import { useModal } from '@/hooks/useModal';
+import { TableTaskEmpty } from '@/modules/DashBoard/components';
 import { taskColumns } from '@/modules/DashBoard/table/columns';
+import { useTasks } from '@/store';
 import { ITask } from '@/types/task';
 
 const testData: ITask[] = [
@@ -16,6 +22,7 @@ const testData: ITask[] = [
     ],
     amount: 2,
     gen_type: TASK_GEN_TYPE.cyclic_generation,
+    isGenerated: false,
   },
   {
     id: '2',
@@ -29,13 +36,25 @@ const testData: ITask[] = [
     ],
     amount: 2,
     gen_type: TASK_GEN_TYPE.random_generation,
+    isGenerated: true,
   },
 ];
 
 export const Dashboard = () => {
+  const { isOpen, openModal } = useModal('create-task');
+  const tasks = useTasks((state) => state.tasks);
   return (
-    <div>
-      <DataTable data={testData} columns={taskColumns} />
+    <div className="flex flex-col gap-8">
+      <h1 className="text-5xl font-bold text-stone-950">{APP_ROUTS.App.Dashboard.Root.name}</h1>
+      <div className="flex flex-col gap-4">
+        {tasks.length !== 0 && (
+          <Button onClick={openModal} className="w-min">
+            Create task
+          </Button>
+        )}
+        <DataTable data={tasks} columns={taskColumns} tableEmptyComponent={<TableTaskEmpty />} />
+      </div>
+      {isOpen && <CreateTaskModal />}
     </div>
   );
 };

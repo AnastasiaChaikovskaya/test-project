@@ -9,7 +9,7 @@ interface IAppTableHeaderProps {
 
 export const AppTableHeader: FC<IAppTableHeaderProps> = ({ title, icon }) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 min-w-max">
       {cloneElement(icon)}
       {title && (
         <Text variant={'size-14'} type={'body-600'} className="text-stone-700">

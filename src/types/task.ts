@@ -19,4 +19,5 @@ export interface ITask {
   images: TTaskImageItem[];
   amount: number;
   gen_type: TTaskGenType;
+  isGenerated: boolean;
 }
