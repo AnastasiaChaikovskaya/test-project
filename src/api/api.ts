@@ -1,5 +1,8 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: '/tz-front',
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    Authorization: 'Basic cmVuZXNhbmRybzpxd2VydHkxMjM0',
+  },
 });

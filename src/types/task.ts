@@ -21,3 +21,22 @@ export interface ITask {
   gen_type: TTaskGenType;
   isGenerated: boolean;
 }
+
+export interface ITaskGenerateFormatsRequest {
+  task_name: string;
+  dimension: string;
+  template_id: string;
+  amount: number;
+  gen_type: string;
+  image_layers: string[];
+  text_layers: string[];
+}
+
+export interface ITaskGenerateImagesRequest {
+  images: string[];
+  dimension: string;
+  style: string;
+  manual_prompts: string;
+  gen_per_ref: number;
+  flow: string;
+}

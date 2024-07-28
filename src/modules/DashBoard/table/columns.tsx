@@ -1,6 +1,5 @@
 import { BadgeComponent } from '@/components/common/BadgeComponent';
 import { AppTableHeader } from '@/components/common/DataTable';
-import { APP_ROUTS } from '@/constants/routes';
 import { ITask } from '@/types/task';
 import { ColumnDef } from '@tanstack/react-table';
 import {
@@ -15,7 +14,7 @@ import {
   Tag,
   Type,
 } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { TableGenerateCell, TableImagesCell, TableResultAdsCell, TableTaskNameCell } from '../components';
 
 export const taskColumns: ColumnDef<ITask>[] = [
   {
@@ -26,14 +25,7 @@ export const taskColumns: ColumnDef<ITask>[] = [
   {
     accessorKey: 'taskName',
     header: () => <AppTableHeader title="Task Name" icon={<Tag className="w-4 h-4 shrink-0 text-stone-700" />} />,
-    cell: ({ row }) => (
-      <NavLink
-        className="hover:underline underline-offset-4 hover:text-blue-800 transition-colors"
-        to={APP_ROUTS.App.Dashboard.GenerateRecourses.makePath(row.original.id)}
-      >
-        {row.original.taskName}
-      </NavLink>
-    ),
+    cell: ({ row }) => <TableTaskNameCell cellData={row.original} />,
   },
   {
     accessorKey: 'dimension',
@@ -50,6 +42,7 @@ export const taskColumns: ColumnDef<ITask>[] = [
   {
     accessorKey: 'images',
     header: () => <AppTableHeader title="Images" icon={<Image className="w-4 h-4 shrink-0 text-stone-700" />} />,
+    cell: ({ row }) => <TableImagesCell cellData={row.original} />,
   },
   {
     accessorKey: 'texts',
@@ -71,11 +64,11 @@ export const taskColumns: ColumnDef<ITask>[] = [
     header: () => (
       <AppTableHeader title="Gen task" icon={<MousePointer className="w-4 h-4 shrink-0 text-stone-700" />} />
     ),
-    cell: () => <p>generate</p>,
+    cell: ({ row }) => <TableGenerateCell rowData={row.original} />,
   },
   {
     accessorKey: 'result_ads',
     header: () => <AppTableHeader title="Result ads" icon={<Images className="w-4 h-4 shrink-0 text-stone-700" />} />,
-    cell: () => <p>result</p>,
+    cell: ({ row }) => <TableResultAdsCell rowData={row.original} />,
   },
 ];
