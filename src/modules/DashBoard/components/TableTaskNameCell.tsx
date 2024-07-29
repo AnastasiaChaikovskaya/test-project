@@ -1,7 +1,7 @@
 import { APP_ROUTS } from '@/constants/routes';
 import { useSelectedTask } from '@/store';
 import { ITask } from '@/types/task';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 interface ITableTaskNameCellProps {
